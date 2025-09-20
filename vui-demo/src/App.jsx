@@ -8,23 +8,14 @@ import AssistantSpeechDisplay from './components/assistantspeech';
 
 export default function App() {
   const [listening, setListening] = useState(false);
+  const [thinking, setThinking] = useState(false);
   const [userSpeech, setUserSpeech] = useState("");
   const [assistantSpeech, setAssistantSpeech] = useState("");
-  const [voices, setVoices] = useState([]);
   const [interimSpeech, setInterimSpeech] = useState("");
-  const [thinking, setThinking] = useState(false);
 
   const recognitionRef = useRef(null);
 
-  // Load available voices
-  useEffect(() => {
-    const synth = window.speechSynthesis;
-    const loadVoices = () => setVoices(synth.getVoices());
-    loadVoices();
-    synth.onvoiceschanged = loadVoices;
-  }, []);
-
-  // Initialize speech recognition
+  // set up for speech recognition
   useEffect(() => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
@@ -36,58 +27,58 @@ export default function App() {
     recognition.continuous = false;
     recognition.interimResults = true;
     recognition.lang = "en-US";
+    // only supported for english for now, can update for more languages 
 
     recognition.onstart = () => {
       setListening(true);
-      setUserSpeech("");
-      setAssistantSpeech("");
-      setInterimSpeech("");
+      setInterimSpeech(""); 
     };
+
     recognition.onspeechend = () => {
-      recognition.stop();
       setListening(false); 
     };
 
-    recognition.onend = () => setListening(false);
-
     recognition.onresult = (event) => {
       let interim = "";
-      let finalTranscript = "";
-
+      let final = "";
+  
       for (let i = event.resultIndex; i < event.results.length; i++) {
         const transcript = event.results[i][0].transcript;
-        event.results[i].isFinal ? (finalTranscript += transcript) : (interim += transcript);
+    
+        if (event.results[i].isFinal) {
+          final += transcript;
+        } else {
+          interim += transcript;
+        }
       }
-
-      if (finalTranscript) {
-        setUserSpeech((prev) => prev + " " + finalTranscript);
-        respondToUser(finalTranscript);
+  
+      if (final) {
+        const cleanTranscript = final.trim();
+        setUserSpeech(cleanTranscript);
+        respondToUser(cleanTranscript);
       }
-
+  
       setInterimSpeech(interim);
     };
 
     recognitionRef.current = recognition;
-  }, [voices]);
 
-  // Function to speak text
-  const speakFriendly = useCallback(
-    (text) => {
-      if (!text) return;
-      const utterance = new SpeechSynthesisUtterance(text);
-      const friendlyVoice = voices.find((v) => v.name.includes("Samantha")) || voices[0];
-      if (friendlyVoice) utterance.voice = friendlyVoice;
-      utterance.pitch = 1.2;
-      utterance.rate = 1;
-      window.speechSynthesis.speak(utterance);
-    },
-    [voices]
-  );
+  }, []);
 
-  // Function to call backend
+  // speak text
+  const speak = useCallback((text) => {
+    if (!text) return;
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.pitch = 1.2;
+    utterance.rate = 1;
+    window.speechSynthesis.speak(utterance);
+  }, [])
+
+  // open ai call
   const respondToUser = async (transcript) => {
     try {
       setThinking(true);
+      // allow thinking to show 
       const res = await fetch("http://localhost:3001/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -96,20 +87,25 @@ export default function App() {
       const data = await res.json();
       const reply = data.reply;
       setAssistantSpeech(reply);
-      speakFriendly(reply);
+      speak(reply);
       setThinking(false);
     } catch (error) {
       console.error(error);
-      const fallback = "Sorry, I couldn't process that.";
+      const fallback = "Sorry, I couldn't process that. Please try again.";
       setAssistantSpeech(fallback);
-      speakFriendly(fallback);
+      speak(fallback);
     }
   };
 
   const toggleListening = () => {
     const recognition = recognitionRef.current;
     if (!recognition) return;
-    listening ? recognition.stop() : recognition.start();
+  
+    if (listening) {
+      recognition.stop();
+    } else {
+      recognition.start();
+    }
   };
 
   const showWelcome = !listening && !userSpeech && !assistantSpeech && !thinking;
