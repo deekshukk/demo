@@ -8,7 +8,7 @@ const AssistantSpeechDisplay = ({ assistantSpeech, thinking }) => {
   }
 
   if (thinking) {
-    return <p className="text-gray-600 italic mt-4">Thinking...</p>;
+    return <p className="text-gray-600 italic mt-4">Thinking</p>;
   }
 
   return null;
