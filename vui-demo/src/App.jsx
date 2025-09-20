@@ -1,8 +1,10 @@
-import { MicrophoneIcon } from "@heroicons/react/24/solid";
 import { useState, useEffect, useRef, useCallback } from "react";
 import "./index.css";
 import { TypeAnimation } from "react-type-animation";
 import Assistant from "./components/assistant";
+import MircophoneButton from "./components/microphone";
+import UserSpeechDisplay from "./components/userspeech";
+import AssistantSpeechDisplay from './components/assistantspeech';
 
 export default function App() {
   const [listening, setListening] = useState(false);
@@ -110,59 +112,48 @@ export default function App() {
     listening ? recognition.stop() : recognition.start();
   };
 
+  const showWelcome = !listening && !userSpeech && !assistantSpeech && !thinking;
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center text-center bg-[#FFFFF0] space-y-8 relative">
-      <Assistant></Assistant>
-      {/* Assistant response / thinking */}
-{assistantSpeech ? (
-  <p className="text-lg text-gray-800 font-medium whitespace-pre-wrap transition-opacity duration-500">
-    {assistantSpeech}
-  </p>
-) : thinking ? (
-  <p className="text-gray-600 italic mt-4">Thinking...</p>
-) : !listening ? (
-  <div>
-    <p className="text-2xl mt-4 mb-4 font-medium text-gray-900 transition-opacity duration-500">
-      Hi! What can I help you with today?
-    </p>
-    <TypeAnimation
-      className="text-m text-gray-700"
-      sequence={[
-        "Ask me about AI...",
-        1000,
-        "Try giving me a command!",
-        1000,
-        "Or just say hello!",
-        1000,
-      ]}
-      speed={50}
-      repeat={Infinity}
-    />
-  </div>
-) : null}
-      <div
-        onClick={toggleListening}
-        className={`relative w-16 h-16 mt-12 mb-10 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 shadow-xl hover:shadow-2xl ${
-          listening
-            ? "bg-gradient-to-br from-[#4F75FF] to-[#305CDE] scale-110"
-            : "bg-gradient-to-br from-[#305CDE] to-[#4F75FF] hover:scale-105"
-        }`}
-      >
-        {listening && <span className="absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75 animate-ping"></span>}
-        <MicrophoneIcon className="w-8 h-8 text-white" />
-      </div> 
+      <Assistant />
 
-    
-      {/* User speech display */}
-      {!listening && !userSpeech && <p className="text-gray-500 transition-opacity duration-500">Click the microphone to start speaking</p>}
-      {listening && (
-        <p className="text-gray-700 font-medium mt-4 transition-opacity duration-500">
-          {userSpeech} <span className="opacity-50">{interimSpeech}</span>
-        </p>
+      {showWelcome && (
+        <div>
+          <p className="text-2xl mt-4 mb-4 font-medium text-gray-900 transition-opacity duration-500">
+            Hi! What can I help you with today?
+          </p>
+          <TypeAnimation
+            className="text-m text-gray-700"
+            sequence={[
+              'Why is Terac awesome?',
+              1000,
+              'How can I streamline my workflows?',
+              1000,
+              'What else can I ask you?',
+              1000,
+            ]}
+            speed={50}
+            repeat={Infinity}
+          />
+        </div>
       )}
-      {!listening && userSpeech && (
-        <p className="text-lg text-gray-700 mt-4 transition-opacity duration-500">{userSpeech}</p>
-      )}
+
+      <AssistantSpeechDisplay 
+        assistantSpeech={assistantSpeech} 
+        thinking={thinking} 
+      />
+
+      <MircophoneButton 
+          listening={listening} 
+          onToggle={toggleListening} 
+      />
+
+      <UserSpeechDisplay
+        listening={listening}
+        userSpeech={userSpeech}
+        interimSpeech={interimSpeech}
+      />
     </div>
   );
 }
