@@ -5,14 +5,13 @@ const UserSpeechDisplay = ({ listening, userSpeech, interimSpeech }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  // Typewriter effect for user speech
   useEffect(() => {
     if (userSpeech && !listening && currentIndex < userSpeech.length) {
       setIsAnimating(true);
       const timeout = setTimeout(() => {
         setDisplayedText(prev => prev + userSpeech[currentIndex]);
         setCurrentIndex(prev => prev + 1);
-      }, 20); // Faster typing for user speech
+      }, 20); 
       
       return () => clearTimeout(timeout);
     } else if (userSpeech && !listening && currentIndex >= userSpeech.length) {
@@ -20,7 +19,6 @@ const UserSpeechDisplay = ({ listening, userSpeech, interimSpeech }) => {
     }
   }, [userSpeech, listening, currentIndex]);
 
-  // Reset when new speech starts
   useEffect(() => {
     if (userSpeech && !listening) {
       setDisplayedText('');
