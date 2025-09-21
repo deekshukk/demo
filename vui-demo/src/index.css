@@ -1,45 +1,5 @@
 @import "tailwindcss";
 
-@keyframes blob {
-  0%,
-  100% {
-    transform: scale(1) rotate(0deg);
-    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-  }
-  25% {
-    transform: scale(1.1) rotate(90deg);
-    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
-  }
-  50% {
-    transform: scale(0.9) rotate(180deg);
-    border-radius: 50% 60% 30% 60% / 60% 40% 60% 40%;
-  }
-  75% {
-    transform: scale(1.05) rotate(270deg);
-    border-radius: 60% 40% 60% 30% / 40% 70% 40% 50%;
-  }
-}
-
-@keyframes blob-reverse {
-  0%,
-  100% {
-    transform: scale(1) rotate(360deg);
-    border-radius: 40% 60% 70% 30% / 40% 70% 60% 30%;
-  }
-  25% {
-    transform: scale(0.95) rotate(270deg);
-    border-radius: 70% 30% 40% 60% / 60% 40% 70% 30%;
-  }
-  50% {
-    transform: scale(1.1) rotate(180deg);
-    border-radius: 30% 70% 60% 40% / 30% 60% 40% 70%;
-  }
-  75% {
-    transform: scale(0.85) rotate(90deg);
-    border-radius: 60% 40% 30% 70% / 70% 30% 60% 40%;
-  }
-}
-
 @keyframes float {
   0%,
   100% {
@@ -88,14 +48,6 @@
   }
 }
 
-.animate-blob {
-  animation: blob 8s ease-in-out infinite;
-}
-
-.animate-blob-reverse {
-  animation: blob-reverse 10s ease-in-out infinite;
-}
-
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
@@ -113,80 +65,267 @@
 }
 
 @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-        .animate-fadeIn {
-          animation: fadeIn 0.5s forwards;
-        }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
-        @keyframes typingDots {
-          0%, 20% {
-            opacity: 0;
-          }
-          50% {
-            opacity: 1;
-          }
-          100% {
-            opacity: 0;
-          }
-        }
+.animate-fadeIn {
+  animation: fadeIn 0.5s forwards;
+}
 
-        .animate-typing-dots span:nth-child(1) {
-          animation: typingDots 1.4s infinite;
-        }
+@keyframes typingDots {
+  0%, 20% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 
-        .animate-typing-dots span:nth-child(2) {
-          animation: typingDots 1.4s infinite 0.2s;
-        }
+.animate-typing-dots span:nth-child(1) {
+  animation: typingDots 1.4s infinite;
+}
 
-        .animate-typing-dots span:nth-child(3) {
-          animation: typingDots 1.4s infinite 0.4s;
-        }
+.animate-typing-dots span:nth-child(2) {
+  animation: typingDots 1.4s infinite 0.2s;
+}
 
-        @keyframes slideInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
+.animate-typing-dots span:nth-child(3) {
+  animation: typingDots 1.4s infinite 0.4s;
+}
 
-        .animate-slideInUp {
-          animation: slideInUp 0.6s ease-out;
-        }
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-        @keyframes slideInDown {
-          from {
-            opacity: 0;
-            transform: translateY(-20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
+.animate-slideInUp {
+  animation: slideInUp 0.6s ease-out;
+}
 
-        .animate-slideInDown {
-          animation: slideInDown 0.6s ease-out;
-        }
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-        @keyframes blink {
-          0%, 50% {
-            opacity: 1;
-          }
-          51%, 100% {
-            opacity: 0;
-          }
-        }
+.animate-slideInDown {
+  animation: slideInDown 0.6s ease-out;
+}
 
-        .animate-blink {
-          animation: blink 1s infinite;
-        }
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+.animate-blink {
+  animation: blink 1s infinite;
+}
+
+@keyframes blob-idle {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  25% {
+    transform: scale(1.05) rotate(90deg);
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+  50% {
+    transform: scale(0.98) rotate(180deg);
+    border-radius: 50% 60% 30% 60% / 60% 40% 60% 40%;
+  }
+  75% {
+    transform: scale(1.02) rotate(270deg);
+    border-radius: 60% 40% 60% 30% / 40% 70% 40% 50%;
+  }
+}
+
+@keyframes blob-listening {
+  0%, 100% {
+    transform: scale(0.85) rotate(0deg);
+    border-radius: 40% 60% 40% 60% / 50% 50% 50% 50%;
+  }
+  25% {
+    transform: scale(0.9) rotate(90deg);
+    border-radius: 35% 65% 35% 65% / 45% 55% 45% 55%;
+  }
+  50% {
+    transform: scale(0.88) rotate(180deg);
+    border-radius: 45% 55% 45% 55% / 40% 60% 40% 60%;
+  }
+  75% {
+    transform: scale(0.92) rotate(270deg);
+    border-radius: 38% 62% 38% 62% / 48% 52% 48% 52%;
+  }
+}
+
+@keyframes blob-thinking {
+  0%, 100% {
+    transform: scale(0.8) rotate(0deg);
+    border-radius: 30% 70% 30% 70% / 60% 40% 60% 40%;
+  }
+  25% {
+    transform: scale(0.85) rotate(45deg);
+    border-radius: 35% 65% 35% 65% / 55% 45% 55% 45%;
+  }
+  50% {
+    transform: scale(0.82) rotate(90deg);
+    border-radius: 40% 60% 40% 60% / 50% 50% 50% 50%;
+  }
+  75% {
+    transform: scale(0.87) rotate(135deg);
+    border-radius: 32% 68% 32% 68% / 58% 42% 58% 42%;
+  }
+}
+
+@keyframes blob-talking {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  25% {
+    transform: scale(1.02) rotate(90deg);
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+  50% {
+    transform: scale(0.98) rotate(180deg);
+    border-radius: 50% 60% 30% 60% / 60% 40% 60% 40%;
+  }
+  75% {
+    transform: scale(1.01) rotate(270deg);
+    border-radius: 60% 40% 60% 30% / 40% 70% 40% 50%;
+  }
+}
+
+@keyframes blob-reverse-idle {
+  0%, 100% {
+    transform: scale(1) rotate(360deg);
+    border-radius: 40% 60% 70% 30% / 40% 70% 60% 30%;
+  }
+  25% {
+    transform: scale(0.95) rotate(270deg);
+    border-radius: 70% 30% 40% 60% / 60% 40% 70% 30%;
+  }
+  50% {
+    transform: scale(1.1) rotate(180deg);
+    border-radius: 30% 70% 60% 40% / 30% 60% 40% 70%;
+  }
+  75% {
+    transform: scale(0.85) rotate(90deg);
+    border-radius: 60% 40% 30% 70% / 70% 30% 60% 40%;
+  }
+}
+
+@keyframes blob-reverse-listening {
+  0%, 100% {
+    transform: scale(0.75) rotate(360deg);
+    border-radius: 35% 65% 35% 65% / 55% 45% 55% 45%;
+  }
+  25% {
+    transform: scale(0.8) rotate(270deg);
+    border-radius: 30% 70% 30% 70% / 60% 40% 60% 40%;
+  }
+  50% {
+    transform: scale(0.78) rotate(180deg);
+    border-radius: 40% 60% 40% 60% / 50% 50% 50% 50%;
+  }
+  75% {
+    transform: scale(0.82) rotate(90deg);
+    border-radius: 32% 68% 32% 68% / 58% 42% 58% 42%;
+  }
+}
+
+@keyframes blob-reverse-thinking {
+  0%, 100% {
+    transform: scale(0.7) rotate(360deg);
+    border-radius: 25% 75% 25% 75% / 70% 30% 70% 30%;
+  }
+  25% {
+    transform: scale(0.75) rotate(270deg);
+    border-radius: 30% 70% 30% 70% / 65% 35% 65% 35%;
+  }
+  50% {
+    transform: scale(0.72) rotate(180deg);
+    border-radius: 35% 65% 35% 65% / 60% 40% 60% 40%;
+  }
+  75% {
+    transform: scale(0.77) rotate(90deg);
+    border-radius: 28% 72% 28% 72% / 68% 32% 68% 32%;
+  }
+}
+
+@keyframes blob-reverse-talking {
+  0%, 100% {
+    transform: scale(1) rotate(360deg);
+    border-radius: 40% 60% 70% 30% / 40% 70% 60% 30%;
+  }
+  25% {
+    transform: scale(0.98) rotate(270deg);
+    border-radius: 70% 30% 40% 60% / 60% 40% 70% 30%;
+  }
+  50% {
+    transform: scale(1.02) rotate(180deg);
+    border-radius: 30% 70% 60% 40% / 30% 60% 40% 70%;
+  }
+  75% {
+    transform: scale(0.99) rotate(90deg);
+    border-radius: 60% 40% 30% 70% / 70% 30% 60% 40%;
+  }
+}
+
+/* Animation classes for different states */
+.animate-blob-idle {
+  animation: blob-idle 8s ease-in-out infinite;
+}
+
+.animate-blob-listening {
+  animation: blob-listening 2s ease-in-out infinite;
+}
+
+.animate-blob-thinking {
+  animation: blob-thinking 1.5s ease-in-out infinite;
+}
+
+.animate-blob-talking {
+  animation: blob-talking 3s ease-in-out infinite;
+}
+
+.animate-blob-reverse-idle {
+  animation: blob-reverse-idle 10s ease-in-out infinite;
+}
+
+.animate-blob-reverse-listening {
+  animation: blob-reverse-listening 2.5s ease-in-out infinite;
+}
+
+.animate-blob-reverse-thinking {
+  animation: blob-reverse-thinking 2s ease-in-out infinite;
+}
+
+.animate-blob-reverse-talking {
+  animation: blob-reverse-talking 4s ease-in-out infinite;
+}
+

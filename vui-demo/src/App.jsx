@@ -77,8 +77,8 @@ export default function App() {
   // open ai call
   const respondToUser = async (transcript) => {
     try {
+      setAssistantSpeech(""); 
       setThinking(true);
-      // allow thinking to show 
       const res = await fetch("http://localhost:3001/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -94,6 +94,7 @@ export default function App() {
       const fallback = "Sorry, I couldn't process that. Please try again.";
       setAssistantSpeech(fallback);
       speak(fallback);
+      setThinking(false);
     }
   };
 
@@ -121,7 +122,11 @@ export default function App() {
           backgroundSize: "cover",
         }}
       />
-      <Assistant />
+      <Assistant 
+        listening={listening} 
+        thinking={thinking} 
+        talking={!!assistantSpeech} 
+      />
 
       {showWelcome && (
         <div className="animate-slideInUp">

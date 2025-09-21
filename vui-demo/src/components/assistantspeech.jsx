@@ -22,18 +22,7 @@ const AssistantSpeechDisplay = ({ assistantSpeech, thinking }) => {
     }
   }, [assistantSpeech]);
 
-  if (assistantSpeech) {
-    return (
-      <div className="w-120 h-35 overflow-hidden">
-        <p className="text-lg text-gray-800 font-medium whitespace-pre-wrap animate-fadeIn">
-          {displayedText}
-          <span className="animate-blink">|</span>
-        </p>
-      </div>
-    );
-  }
-
-  if (thinking) {
+  if (thinking && !assistantSpeech) {
     return (
       <div className="text-gray-600 italic mt-4 animate-slideInUp">
         <span>Thinking</span>
@@ -42,6 +31,17 @@ const AssistantSpeechDisplay = ({ assistantSpeech, thinking }) => {
           <span>.</span>
           <span>.</span>
         </span>
+      </div>
+    );
+  }
+
+  if (assistantSpeech) {
+    return (
+      <div className="w-120 h-35 overflow-hidden">
+        <p className="text-lg text-gray-800 font-medium whitespace-pre-wrap animate-fadeIn">
+          {displayedText}
+          <span className="animate-blink">|</span>
+        </p>
       </div>
     );
   }
