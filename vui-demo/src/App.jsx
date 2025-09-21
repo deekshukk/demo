@@ -112,26 +112,37 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center text-center bg-[#FFFFF0] space-y-8 relative">
+      <div
+        className="absolute inset-0 opacity-3"
+        style={{
+          backgroundImage: "url('/terac.svg')",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+        }}
+      />
       <Assistant />
 
       {showWelcome && (
-        <div>
-          <p className="text-2xl mt-4 mb-4 font-medium text-gray-900 transition-opacity duration-500">
+        <div className="animate-slideInUp">
+          <p className="text-2xl mt-4 mb-4 font-medium text-gray-900 animate-fadeIn">
             Hi! What can I help you with today?
           </p>
-          <TypeAnimation
-            className="text-m text-gray-700"
-            sequence={[
-              'Why is Terac awesome?',
-              1000,
-              'How can I streamline my workflows?',
-              1000,
-              'What else can I ask you?',
-              1000,
-            ]}
-            speed={50}
-            repeat={Infinity}
-          />
+          <div className="animate-slideInDown">
+            <TypeAnimation
+              className="text-m text-gray-700"
+              sequence={[
+                'Why is Terac awesome?',
+                1000,
+                'How can I streamline my workflows?',
+                1000,
+                'What else can I ask you?',
+                1000,
+              ]}
+              speed={50}
+              repeat={Infinity}
+            />
+          </div>
         </div>
       )}
 
