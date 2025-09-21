@@ -4,19 +4,17 @@ const AssistantSpeechDisplay = ({ assistantSpeech, thinking }) => {
   const [displayedText, setDisplayedText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Typewriter effect for assistant speech
   useEffect(() => {
     if (assistantSpeech && currentIndex < assistantSpeech.length) {
       const timeout = setTimeout(() => {
         setDisplayedText(prev => prev + assistantSpeech[currentIndex]);
         setCurrentIndex(prev => prev + 1);
-      }, 30); // Adjust speed here
+      }, 30); 
       
       return () => clearTimeout(timeout);
     }
   }, [assistantSpeech, currentIndex]);
 
-  // Reset when new speech starts
   useEffect(() => {
     if (assistantSpeech) {
       setDisplayedText('');

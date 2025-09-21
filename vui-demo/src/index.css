@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-/* Added custom animations for the blob persona */
 @keyframes blob {
   0%,
   100% {
