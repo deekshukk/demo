@@ -159,6 +159,7 @@ export default function App() {
       <MircophoneButton 
           listening={listening} 
           onToggle={toggleListening} 
+          showWelcome={showWelcome}
       />
 
       <UserSpeechDisplay

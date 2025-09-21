@@ -1,2 +1,2 @@
 # demo
-voice ux for terac :) 
+voice ux for terac 
