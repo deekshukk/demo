@@ -5,6 +5,7 @@ const UserSpeechDisplay = ({ listening, userSpeech, interimSpeech }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
+  // typewriter
   useEffect(() => {
     if (userSpeech && !listening && currentIndex < userSpeech.length) {
       setIsAnimating(true);
@@ -19,6 +20,7 @@ const UserSpeechDisplay = ({ listening, userSpeech, interimSpeech }) => {
     }
   }, [userSpeech, listening, currentIndex]);
 
+  // reset
   useEffect(() => {
     if (userSpeech && !listening) {
       setDisplayedText('');
@@ -30,6 +32,7 @@ const UserSpeechDisplay = ({ listening, userSpeech, interimSpeech }) => {
     return null;
   }
 
+  // listening text 
   if (listening) {
     return (
       <p className="text-gray-700 font-medium animate-slideInDown">
@@ -38,6 +41,7 @@ const UserSpeechDisplay = ({ listening, userSpeech, interimSpeech }) => {
     );
   }
 
+  // user speech
   if (userSpeech) {
     return (
       <p className="text-lg text-gray-700 animate-slideInDown">

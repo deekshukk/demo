@@ -1,4 +1,4 @@
-export default function Assistant({ listening = false, thinking = false, talking = false }) {
+const Assistant = ({ listening = false, thinking = false, talking = false }) => {
   const getBlobAnimation = () => {
     if (talking) return 'animate-blob-talking';
     if (thinking) return 'animate-blob-thinking';
@@ -23,3 +23,5 @@ export default function Assistant({ listening = false, thinking = false, talking
     </div>
   );
 }
+
+export default Assistant;
