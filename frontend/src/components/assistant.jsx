@@ -7,10 +7,7 @@ export default function Assistant({ listening = false, thinking = false, talking
   };
 
   const getBlobReverseAnimation = () => {
-    if (talking) return 'animate-blob-reverse-talking';
-    if (thinking) return 'animate-blob-reverse-thinking';
-    if (listening) return 'animate-blob-reverse-listening';
-    return 'animate-blob-reverse-idle';
+    return 'animate-blob-idle';
   };
 
   return (
