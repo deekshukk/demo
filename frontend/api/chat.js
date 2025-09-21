@@ -17,6 +17,8 @@ export default async function handler(req, res) {
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
+      content:
+          "You are a voice assistant. Keep replies short, natural, and easy to say aloud. Avoid long lists, formatting, or symbols. Make responses no more than 3 sentences",
       messages: [{ role: "user", content: message }],
     });
 
